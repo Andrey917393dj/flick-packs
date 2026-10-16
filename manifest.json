@@ -1,0 +1,18 @@
+{
+  "network": "Flick Official Protected Network 2026",
+  "authorSignature": "b39d0552373aaaf614059d9bfdd4507abc092154c8dd831a89ffaec6ce9b62f4369292b875463897dd6ae899fdea8c9b6b6d6d317e2f9d7a792e249f9efc676e94b221b8d9ec03036054f643935a0a99961b7b9ad971e45882c9dad37296487564196e1b63cb249c16629e1f723940127b0be0be31b578c2b14e0c76e1bea4f6194912107b935af91c73351c38e108fc3ff80575b8cc63b6a290f1602b16a223383f66e8b3f72ba1f10b8caa0b14d5bc4931eb283398d37d3ad9d1da7cc8f75d30416622aba51fab6ee0f665eff057d91dd7fa3fd10292c09a7f3dba37075fbca088599baf313d21c93a09e357698296f369e8263246826ee28e994daac4b79a",
+  "launcher_version": "1.0.0",
+  "killswitch": false,
+  "killswitchReason": "",
+  "modpacks": [
+    {
+      "id": "magic_rpg",
+      "name": "⚡ Flick: Magic & RPG",
+      "version": "1.12.2",
+      "forgeVersion": "14.23.5.2860",
+      "description": "Хардкорная сборка с кастомными квестами, магией и артефактами",
+      "downloadUrl": "https://github.com/YOUR_USERNAME/YOUR_REPO/releases/download/v1.0.0/magic_rpg.pak",
+      "sizeMb": "280"
+    }
+  ]
+}
