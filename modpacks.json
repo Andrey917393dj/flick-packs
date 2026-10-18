@@ -1,0 +1,17 @@
+{
+  "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
+  "killswitch": false,
+  "killswitchReason": "",
+  "updatedAt": "2026-10-18T23:45:00.000Z",
+  "modpacks": [
+    {
+      "id": "iron_legacy_tech_survival",
+      "name": "⚡ Flick: Iron Legacy Tech & Survival",
+      "version": "1.12.2",
+      "forgeVersion": "14.23.5.2860",
+      "description": "Погрузитесь в мир, где индустриальная революция сталкивается с суровой природой и опасными измерениями.",
+      "pakFile": "packs/iron_legacy_tech_survival.pak",
+      "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.0.0/iron_legacy_tech_survival.pak"
+    }
+  ]
+}
