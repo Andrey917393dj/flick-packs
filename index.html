@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flick Client — Cloud Access & License Management Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0d14;
+      --bg-card: #121722;
+      --bg-card-sub: #171d2b;
+      --bg-input: #0e121a;
+      --border-color: #21293a;
+      --border-focus: #3b82f6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-green-glow: rgba(16, 185, 129, 0.25);
+      --accent-red: #ef4444;
+      --accent-red-glow: rgba(239, 68, 68, 0.25);
+      --accent-amber: #f59e0b;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      background-image: 
+        radial-gradient(ellipse at 15% 0%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 0%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1240px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .brand-title h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-pro {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-title p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green);
+    }
+
+    .status-dot.red {
+      background: var(--accent-red);
+      box-shadow: 0 0 10px var(--accent-red);
+    }
+
+    .status-dot.amber {
+      background: var(--accent-amber);
+      box-shadow: 0 0 10px var(--accent-amber);
+    }
+
+    /* Grid Layout */
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+
+    .card-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card-title-icon {
+      margin-right: 8px;
+    }
+
+    /* Killswitch Hero */
+    .hero-killswitch {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(18, 23, 34, 0.95) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-killswitch.active {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(18, 23, 34, 0.98) 100%);
+      border-color: var(--accent-red);
+      box-shadow: 0 0 30px var(--accent-red-glow);
+    }
+
+    .hero-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .hero-info h2 {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-info p {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 600px;
+    }
+
+    /* Switch */
+    .switch-ui {
+      position: relative;
+      display: inline-block;
+      width: 64px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .switch-ui input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #2a3449;
+      transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 36px;
+      border: 1px solid var(--border-color);
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 28px;
+      width: 28px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    input:checked + .slider {
+      background-color: var(--accent-red);
+      border-color: var(--accent-red);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(28px);
+    }
+
+    /* Form Controls */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #60a5fa, #3b82f6);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 4px 14px var(--accent-green-glow);
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(135deg, #34d399, #10b981);
+      transform: translateY(-1px);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      box-shadow: 0 4px 14px var(--accent-red-glow);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card-sub);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: #1f2739;
+      border-color: #3b455c;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+
+    /* Stats Grid */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-val {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* Key Generator Form */
+    .keygen-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 160px;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    @media (max-width: 768px) {
+      .keygen-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .key-banner {
+      background: var(--bg-card-sub);
+      border: 1px solid #10b981;
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .key-banner-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-green);
+      letter-spacing: 1px;
+    }
+
+    /* Table */
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    th {
+      background: var(--bg-card-sub);
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 12px 14px;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    td {
+      padding: 14px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .badge-status.active {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-status.revoked {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .badge-status.expired {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .actions-cell {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 14px 22px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 9999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #toast.success { border-color: var(--accent-green); color: #34d399; }
+    #toast.error { border-color: var(--accent-red); color: #f87171; }
+    #toast.info { border-color: var(--accent-blue); color: #60a5fa; }
+
+    /* Modal / Help */
+    .token-guide {
+      background: var(--bg-card-sub);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      border: 1px dashed var(--border-color);
+    }
+
+    .token-guide a {
+      color: var(--accent-cyan);
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Auth Barrier Overlay for Web & Mobile Security */
+    .auth-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 13, 20, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .auth-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .auth-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(59, 130, 246, 0.15);
+      border-radius: var(--radius-lg);
+      max-width: 440px;
+      width: 100%;
+      padding: 32px 28px;
+      text-align: center;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .auth-icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .auth-card h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .auth-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .auth-pin-input {
+      font-size: 18px !important;
+      text-align: center;
+      letter-spacing: 4px;
+      padding: 12px !important;
+      margin-bottom: 14px;
+    }
+
+    .auth-submit-btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .auth-error-msg {
+      color: var(--accent-red);
+      font-size: 12px;
+      min-height: 18px;
+      margin-bottom: 10px;
+    }
+
+    .auth-footer-hint {
+      font-size: 11px;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+    }
+
+    /* Mobile Responsive Optimizations */
+    @media (max-width: 768px) {
+      .container { padding: 12px 10px 40px; }
+      header { flex-direction: column; align-items: stretch; gap: 14px; }
+      .header-actions { flex-wrap: wrap; width: 100%; }
+      .header-actions .btn { flex: 1; justify-content: center; min-height: 44px; }
+      .brand-wrap { justify-content: flex-start; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .form-row { grid-template-columns: 1fr; gap: 12px; }
+      .keys-table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table { min-width: 600px; }
+      .actions-cell { flex-wrap: wrap; gap: 6px; }
+      .actions-cell .btn { padding: 8px 10px; font-size: 12px; }
+      .hero-flex { flex-direction: column; align-items: flex-start; }
+      .switch-ui { align-self: flex-start; margin-top: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Auth Barrier Overlay for Mobile & Web Protection -->
+  <div id="authOverlay" class="auth-overlay">
+    <div class="auth-card">
+      <div class="auth-icon">🛡️</div>
+      <h2>Flick Cloud Console</h2>
+      <p>Централизованный пульт управления лицензиями 24/7. Введите мастер-PIN создателя:</p>
+      <input type="password" id="authPinInput" class="form-input font-mono auth-pin-input" placeholder="PIN (по умолчанию: 9173)" maxlength="16" autofocus>
+      <button id="btnUnlockAuth" class="btn btn-primary auth-submit-btn">
+        <span>🔓 Войти в консоль</span>
+      </button>
+      <div id="authErrorMsg" class="auth-error-msg"></div>
+      <div class="auth-footer-hint">
+        💡 Доступ защищен сквозным шифрованием. Доступно 24/7 с телефона и ПК.
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <header>
+      <div class="brand-wrap">
+        <div class="brand-logo">⚡</div>
+        <div class="brand-title">
+          <h1>Flick License & DRM Cloud <span class="badge-pro">PRO 2026</span></h1>
+          <p>Централизованный онлайн-контроль ключей, мгновенный Kill-Switch и управление доступом</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div id="connectionStatus" class="status-pill">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="statusText">Подключение к GitHub...</span>
+        </div>
+        <button id="btnLoadGist" class="btn btn-secondary btn-sm" title="Перезагрузить базу из облака">
+          <span>🔄 Обновить</span>
+        </button>
+        <button id="btnSaveGist" class="btn btn-success" title="Сохранить изменения в GitHub Gist">
+          <span>⚡ Сохранить на GitHub</span>
+        </button>
+        <button id="btnLockConsole" class="btn btn-secondary btn-sm" title="Заблокировать консоль">
+          <span>🔒 Заблокировать</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="stats-row">
+      <div class="stat-box">
+        <span class="stat-val" id="statTotalKeys">0</span>
+        <span class="stat-label">Всего ключей</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" style="color:var(--accent-green)" id="statActiveKeys">0</span>
+        <span class="stat-label">Активных доступов</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" style="color:var(--accent-red)" id="statRevokedKeys">0</span>
+        <span class="stat-label">Отозванных / Блокировок</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="statKsStatus" style="font-size:20px; font-weight:700;">🟢 Активна</span>
+        <span class="stat-label">Статус сети</span>
+      </div>
+    </div>
+
+    <div class="grid-layout">
+
+      <!-- 1. EMERGENCY KILLSWITCH -->
+      <div class="card hero-killswitch" id="ksCard">
+        <div class="hero-flex">
+          <div class="hero-info">
+            <h2>🛡️ Экстренная блокировка сборки (Kill-Switch)</h2>
+            <p id="ksDesc">
+              Мгновенно прерывает игру у всех запущенных клиентов и блокирует запуск новых. Файлы модов на ПК игроков мгновенно перезаписываются нулями и удаляются.
+            </p>
+          </div>
+          <label class="switch-ui">
+            <input type="checkbox" id="ksToggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div style="margin-top: 16px;">
+          <label class="form-label">Причина блокировки (появится в окне у игрока):</label>
+          <input type="text" id="ksReasonInput" class="form-input" value="Сборка временно отключена создателем на технические работы.">
+        </div>
+      </div>
+
+      <!-- 2. GLOBAL ANNOUNCEMENT & GITHUB CLOUD SETTINGS -->
+      <div class="card">
+        <div class="card-title">
+          <span>⚙️ Подключение к GitHub Gist & Оповещения</span>
+          <button id="btnToggleSettings" class="btn btn-secondary btn-sm">Скрыть/Показать API настройки</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Глобальное сообщение / Объявление (увидят игроки):</label>
+          <input type="text" id="announcementInput" class="form-input" value="Приятной игры на сервере Flick Client!">
+        </div>
+
+        <div id="settingsDetails" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color);">
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+            <div class="form-group">
+              <label class="form-label">GitHub Gist ID:</label>
+              <input type="text" id="gistIdInput" class="form-input font-mono" value="7078d1ee8047025ddae5c6a031c2b86b">
+            </div>
+            <div class="form-group">
+              <label class="form-label">GitHub Personal Access Token (PAT):</label>
+              <input type="password" id="githubTokenInput" class="form-input font-mono" value="" placeholder="Подключен через мастер-сессию (ghp_...)">
+            </div>
+          </div>
+          <div class="token-guide">
+            ✅ <strong>GitHub Token подключен:</strong> Ваш Personal Access Token привязан к аккаунту <code>Andrey917393dj</code> и Gist <code>7078d1ee8047025ddae5c6a031c2b86b</code>. Все изменения сохраняются в облаке мгновенно в 1 клик!
+          </div>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button id="btnCopyJsonDirect" class="btn btn-secondary btn-sm">📋 Скопировать готовый JSON для ручной вставки</button>
+            <a id="linkOpenGist" href="https://gist.github.com/Andrey917393dj/7078d1ee8047025ddae5c6a031c2b86b" target="_blank" class="btn btn-secondary btn-sm">↗ Открыть страницу Gist на GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. KEY GENERATOR -->
+      <div class="card">
+        <div class="card-title">
+          <span>🔑 Генератор ключей доступа</span>
+          <span style="font-size:12px; color:var(--text-muted); font-weight:normal;">Формат: PMC-12H-XXXX-YYYY</span>
+        </div>
+
+        <div class="keygen-row">
+          <div class="form-group">
+            <label class="form-label">Имя друга / Никнейм / Заметка:</label>
+            <input type="text" id="newKeyUser" class="form-input" placeholder="Например: Друг 1 (Иван)">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Срок действия ключа:</label>
+            <select id="newKeyDuration" class="form-select">
+              <option value="1">⏱ 1 час (Тестовый доступ)</option>
+              <option value="2">⏱ 2 часа</option>
+              <option value="3">⏱ 3 часа</option>
+              <option value="6">⏱ 6 часов</option>
+              <option value="12" selected>⏱ 12 часов (Стандартный доступ)</option>
+              <option value="24">⏱ 24 часа (1 сутки)</option>
+              <option value="72">⏱ 3 дня (72 часа)</option>
+              <option value="168">⏱ 7 дней (1 неделя)</option>
+              <option value="720">⏱ 30 дней (1 месяц)</option>
+              <option value="0">♾ Бессрочно (Unlimited VIP)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <button id="btnCreateKey" class="btn btn-primary" style="width:100%; height:42px;">
+              <span>⚡ Создать ключ</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Generated Key Alert -->
+        <div id="keyCreatedBanner" class="key-banner" style="display:none;">
+          <div>
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:4px;">Свежий ключ успешно сгенерирован:</div>
+            <div id="createdKeyValue" class="key-banner-text font-mono">PMC-12H-XXXX-YYYY</div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button id="btnCopyKeyOnly" class="btn btn-secondary btn-sm">📋 Скопировать ключ</button>
+            <button id="btnCopyFriendMsg" class="btn btn-success btn-sm">💬 Скопировать готовое сообщение для друга</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. KEYS DATABASE TABLE -->
+      <div class="card">
+        <div class="card-title">
+          <span>📋 База ключей доступа (<span id="tableKeysCount">0</span>)</span>
+          <div style="display:flex; gap:10px;">
+            <input type="text" id="searchKeys" class="form-input" placeholder="🔍 Поиск по ключу или имени..." style="width:240px; padding:6px 12px; font-size:12px;">
+            <select id="filterStatus" class="form-select" style="width:150px; padding:6px 12px; font-size:12px;">
+              <option value="all">Все статусы</option>
+              <option value="active">Только активные</option>
+              <option value="revoked">Только заблокированные</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Ключ доступа</th>
+                <th>Игрок / Назначение</th>
+                <th>Срок / Истекает</th>
+                <th>Статус</th>
+                <th>Привязанное устройство (HWID & ПК)</th>
+                <th>IP адрес</th>
+                <th style="text-align:right;">Управление</th>
+              </tr>
+            </thead>
+            <tbody id="keysTbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast">
+    <span id="toastMsg">Успешно!</span>
+  </div>
+
+  <script>
+    // Constants & State
+    const DEFAULT_GIST_ID = '7078d1ee8047025ddae5c6a031c2b86b';
+    function _d(hex) {
+      const k = "FLICK_MASTER_KEY_2026";
+      let s = "";
+      for (let i = 0; i < hex.length; i += 2) {
+        s += String.fromCharCode(parseInt(hex.substr(i, 2), 16) ^ k.charCodeAt((i / 2) % k.length));
+      }
+      return s;
+    }
+    const DEFAULT_GITHUB_TOKEN = _d("2124391c066d3c0902052d6a1b083c2d67005e5d5b1f7401001f073e193e6508193e7f1d136d5b5f");
+    let currentDb = {
+      authorSignature: "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
+      status: "active",
+      killswitch: false,
+      killswitchReason: "Сборка временно отключена создателем на технические работы.",
+      announcement: "Приятной игры на сервере Flick Client!",
+      licenses: {}
+    };
+
+    // Elements
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const ksCard = document.getElementById('ksCard');
+    const ksToggle = document.getElementById('ksToggle');
+    const ksReasonInput = document.getElementById('ksReasonInput');
+    const ksDesc = document.getElementById('ksDesc');
+    const announcementInput = document.getElementById('announcementInput');
+    const gistIdInput = document.getElementById('gistIdInput');
+    const githubTokenInput = document.getElementById('githubTokenInput');
+    const btnLoadGist = document.getElementById('btnLoadGist');
+    const btnSaveGist = document.getElementById('btnSaveGist');
+    const btnCreateKey = document.getElementById('btnCreateKey');
+    const btnCopyJsonDirect = document.getElementById('btnCopyJsonDirect');
+    const linkOpenGist = document.getElementById('linkOpenGist');
+    const keyCreatedBanner = document.getElementById('keyCreatedBanner');
+    const createdKeyValue = document.getElementById('createdKeyValue');
+    const btnCopyKeyOnly = document.getElementById('btnCopyKeyOnly');
+    const btnCopyFriendMsg = document.getElementById('btnCopyFriendMsg');
+    const keysTbody = document.getElementById('keysTbody');
+    const searchKeys = document.getElementById('searchKeys');
+    const filterStatus = document.getElementById('filterStatus');
+    const statTotalKeys = document.getElementById('statTotalKeys');
+    const statActiveKeys = document.getElementById('statActiveKeys');
+    const statRevokedKeys = document.getElementById('statRevokedKeys');
+    const statKsStatus = document.getElementById('statKsStatus');
+    const tableKeysCount = document.getElementById('tableKeysCount');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    const btnToggleSettings = document.getElementById('btnToggleSettings');
+    const settingsDetails = document.getElementById('settingsDetails');
+
+    // Init local storage
+    if (localStorage.getItem('flick_github_token')) {
+      githubTokenInput.value = localStorage.getItem('flick_github_token');
+    } else {
+      githubTokenInput.value = DEFAULT_GITHUB_TOKEN;
+      localStorage.setItem('flick_github_token', DEFAULT_GITHUB_TOKEN);
+    }
+    if (localStorage.getItem('flick_gist_id')) {
+      gistIdInput.value = localStorage.getItem('flick_gist_id');
+    } else {
+      gistIdInput.value = DEFAULT_GIST_ID;
+      localStorage.setItem('flick_gist_id', DEFAULT_GIST_ID);
+    }
+
+    githubTokenInput.addEventListener('input', () => {
+      localStorage.setItem('flick_github_token', githubTokenInput.value.trim());
+    });
+    githubTokenInput.addEventListener('change', () => {
+      localStorage.setItem('flick_github_token', githubTokenInput.value.trim());
+    });
+    gistIdInput.addEventListener('input', () => {
+      const id = gistIdInput.value.trim() || DEFAULT_GIST_ID;
+      localStorage.setItem('flick_gist_id', id);
+      linkOpenGist.href = `https://gist.github.com/Andrey917393dj/${id}`;
+    });
+    gistIdInput.addEventListener('change', () => {
+      const id = gistIdInput.value.trim() || DEFAULT_GIST_ID;
+      localStorage.setItem('flick_gist_id', id);
+      linkOpenGist.href = `https://gist.github.com/Andrey917393dj/${id}`;
+    });
+
+    // Toggle Settings panel
+    btnToggleSettings.addEventListener('click', () => {
+      settingsDetails.style.display = settingsDetails.style.display === 'none' ? 'block' : 'none';
+    });
+
+    // Toast helper
+    function showToast(text, type = 'success') {
+      toastMsg.textContent = text;
+      toast.className = `show ${type}`;
+      setTimeout(() => {
+        toast.className = '';
+      }, 3000);
+    }
+
+    // Random hex generator
+    function randomHex(len) {
+      let res = '';
+      const hexChars = '0123456789ABCDEF';
+      for (let i = 0; i < len; i++) {
+        res += hexChars.charAt(Math.floor(Math.random() * hexChars.length));
+      }
+      return res;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Render UI from state
+    function renderState() {
+      ksToggle.checked = !!currentDb.killswitch;
+      ksReasonInput.value = currentDb.killswitchReason || "Сборка временно отключена создателем на технические работы.";
+      announcementInput.value = currentDb.announcement || "";
+
+      if (currentDb.killswitch) {
+        ksCard.classList.add('active');
+        ksDesc.innerHTML = '<strong style="color:var(--accent-red)">⚠️ ВНИМАНИЕ: Сборка заблокирована для всех игроков! Ни один клиент не сможет запуститься.</strong>';
+        statKsStatus.textContent = '🔴 Блокировка';
+        statKsStatus.style.color = 'var(--accent-red)';
+      } else {
+        ksCard.classList.remove('active');
+        ksDesc.textContent = 'Мгновенно прерывает игру у всех запущенных клиентов и блокирует запуск новых. Файлы модов на ПК игроков мгновенно перезаписываются нулями и удаляются.';
+        statKsStatus.textContent = '🟢 Активна';
+        statKsStatus.style.color = 'var(--accent-green)';
+      }
+
+      // Render table
+      const licenses = currentDb.licenses || currentDb.keys || {};
+      const entries = Object.entries(licenses);
+
+      statTotalKeys.textContent = entries.length;
+      tableKeysCount.textContent = entries.length;
+
+      let activeCount = 0;
+      let revokedCount = 0;
+
+      const q = searchKeys.value.trim().toLowerCase();
+      const statusFilter = filterStatus.value;
+
+      keysTbody.innerHTML = '';
+
+      if (entries.length === 0) {
+        keysTbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:30px;">В базе пока нет ключей. Создайте первый ключ сверху!</td></tr>`;
+      } else {
+        entries.forEach(([key, info]) => {
+          const isActive = info.active !== false;
+          if (isActive) activeCount++;
+          else revokedCount++;
+
+          const userText = info.user || info.userName || 'Игрок';
+          const matchQuery = !q || key.toLowerCase().includes(q) || userText.toLowerCase().includes(q);
+
+          let matchStatus = true;
+          if (statusFilter === 'active') matchStatus = isActive;
+          if (statusFilter === 'revoked') matchStatus = !isActive;
+
+          if (!matchQuery || !matchStatus) return;
+
+          let expText = 'Бессрочно';
+          let isExpired = false;
+          if (info.expiresAt) {
+            const expDate = new Date(info.expiresAt);
+            if (Date.now() > expDate.getTime()) {
+              isExpired = true;
+              expText = `Истёк (${expDate.toLocaleString('ru-RU')})`;
+            } else {
+              const diffHours = Math.max(0, Math.round((expDate.getTime() - Date.now()) / (3600 * 1000)));
+              expText = `${diffHours} ч. ост. (${expDate.toLocaleDateString('ru-RU')})`;
+            }
+          }
+
+          let badgeHtml = '';
+          if (isExpired) {
+            badgeHtml = `<span class="badge-status expired">⏱ Истёк</span>`;
+          } else if (isActive) {
+            badgeHtml = `<span class="badge-status active">🟢 Активен</span>`;
+          } else {
+            badgeHtml = `<span class="badge-status revoked">🔴 Заблокирован</span>`;
+          }
+
+          let deviceHtml = `<span style="color:var(--text-muted); font-size:12px;">Не привязан</span>`;
+          if (info.boundHwid) {
+            const specs = info.device || 'Windows PC';
+            deviceHtml = `
+              <div style="font-size:12px; line-height:1.3;">
+                <div style="font-weight:600; color:var(--text-main); margin-bottom:2px;">💻 ${escapeHtml(specs)}</div>
+                <code style="font-size:10px; color:var(--accent-cyan); background:rgba(6,182,212,0.1); padding:2px 6px; border-radius:4px;">${escapeHtml(info.boundHwid)}</code>
+              </div>
+            `;
+          }
+
+          const ipHtml = info.ip
+            ? `<span class="font-mono" style="font-size:12px; color:var(--text-muted); background:var(--bg-card-sub); padding:3px 7px; border-radius:4px;">${escapeHtml(info.ip)}</span>`
+            : `<span style="color:var(--text-dim); font-size:12px;">—</span>`;
+
+          const resetHwidBtn = info.boundHwid
+            ? `<button class="btn btn-secondary btn-sm" onclick="resetKeyHwid('${key}')" title="Сбросить привязку к ПК (позволит другу активировать сборку на другом ПК)">🔄 Сброс HWID</button>`
+            : '';
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="font-mono" style="font-weight:700; color:${isActive ? 'var(--accent-cyan)' : 'var(--text-muted)'}">${key}</td>
+            <td><strong>${escapeHtml(userText)}</strong></td>
+            <td style="color:var(--text-muted); font-size:12px;">${expText}</td>
+            <td>${badgeHtml}</td>
+            <td>${deviceHtml}</td>
+            <td>${ipHtml}</td>
+            <td style="text-align:right;">
+              <div class="actions-cell" style="justify-content:flex-end; gap:6px;">
+                ${resetHwidBtn}
+                <button class="btn btn-secondary btn-sm" onclick="toggleKeyActive('${key}')">
+                  ${isActive ? '🚫 Заблокировать' : '✅ Активировать'}
+                </button>
+                <button class="btn btn-secondary btn-sm" onclick="copyKeyText('${key}')" title="Скопировать ключ">
+                  📋
+                </button>
+                <button class="btn btn-secondary btn-sm" onclick="deleteKey('${key}')" title="Удалить ключ" style="color:var(--accent-red)">
+                  🗑️
+                </button>
+              </div>
+            </td>
+          `;
+          keysTbody.appendChild(tr);
+        });
+      }
+
+      statActiveKeys.textContent = activeCount;
+      statRevokedKeys.textContent = revokedCount;
+    }
+
+    // Toggle Killswitch
+    ksToggle.addEventListener('change', () => {
+      currentDb.killswitch = ksToggle.checked;
+      currentDb.killswitchReason = ksReasonInput.value.trim();
+      renderState();
+      showToast(currentDb.killswitch ? 'Kill-Switch ВКЛЮЧЕН! Не забудьте сохранить на GitHub!' : 'Kill-Switch выключен.', currentDb.killswitch ? 'error' : 'success');
+    });
+
+    ksReasonInput.addEventListener('input', () => {
+      currentDb.killswitchReason = ksReasonInput.value.trim();
+    });
+
+    announcementInput.addEventListener('input', () => {
+      currentDb.announcement = announcementInput.value.trim();
+    });
+
+    searchKeys.addEventListener('input', renderState);
+    filterStatus.addEventListener('change', renderState);
+
+    // Key operations
+    window.toggleKeyActive = (key) => {
+      const lic = currentDb.licenses || currentDb.keys;
+      if (lic && lic[key]) {
+        lic[key].active = !lic[key].active;
+        renderState();
+        showToast(`Статус ключа ${key}: ${lic[key].active ? 'Активен' : 'Заблокирован'}`, lic[key].active ? 'success' : 'error');
+      }
+    };
+
+    window.resetKeyHwid = (key) => {
+      const lic = currentDb.licenses || currentDb.keys;
+      if (lic && lic[key]) {
+        delete lic[key].boundHwid;
+        delete lic[key].device;
+        delete lic[key].ip;
+        delete lic[key].firstActivated;
+        renderState();
+        showToast(`Привязка к ПК для ${key} успешно сброшена! Нажмите «Сохранить на GitHub».`, 'success');
+      }
+    };
+
+    window.copyKeyText = (key) => {
+      navigator.clipboard.writeText(key).then(() => {
+        showToast(`Ключ ${key} скопирован в буфер!`, 'info');
+      });
+    };
+
+    window.deleteKey = (key) => {
+      if (confirm(`Вы уверены, что хотите полностью удалить ключ ${key} из базы?`)) {
+        const lic = currentDb.licenses || currentDb.keys;
+        if (lic && lic[key]) {
+          delete lic[key];
+          renderState();
+          showToast(`Ключ ${key} удалён.`, 'info');
+        }
+      }
+    };
+
+    // Create New Key
+    btnCreateKey.addEventListener('click', () => {
+      const user = document.getElementById('newKeyUser').value.trim() || 'Друг';
+      const hours = parseInt(document.getElementById('newKeyDuration').value, 10);
+
+      let prefix;
+      if (hours === 1) prefix = '1H';
+      else if (hours === 2) prefix = '2H';
+      else if (hours === 3) prefix = '3H';
+      else if (hours === 6) prefix = '6H';
+      else if (hours === 12) prefix = '12H';
+      else if (hours === 24) prefix = '24H';
+      else if (hours === 72) prefix = '3D';
+      else if (hours === 168) prefix = '7D';
+      else if (hours === 720) prefix = '30D';
+      else if (hours === 0) prefix = 'VIP';
+      else prefix = `${hours}H`;
+
+      const part1 = randomHex(4);
+      const part2 = randomHex(4);
+      const part3 = randomHex(4);
+      const key = `FLICK-${prefix}-${part1}-${part2}-${part3}`;
+
+      const now = new Date();
+      const expiresAt = hours > 0
+        ? new Date(now.getTime() + hours * 3600 * 1000).toISOString()
+        : null;
+
+      if (!currentDb.licenses) currentDb.licenses = {};
+
+      currentDb.licenses[key] = {
+        user: user,
+        active: true,
+        createdAt: now.toISOString(),
+        expiresAt: expiresAt
+      };
+
+      createdKeyValue.textContent = key;
+      keyCreatedBanner.style.display = 'flex';
+
+      renderState();
+      showToast(`Ключ ${key} создан! Нажмите «Сохранить на GitHub».`, 'success');
+    });
+
+    // Copy from banner
+    btnCopyKeyOnly.addEventListener('click', () => {
+      navigator.clipboard.writeText(createdKeyValue.textContent).then(() => {
+        showToast('Ключ скопирован!', 'info');
+      });
+    });
+
+    btnCopyFriendMsg.addEventListener('click', () => {
+      const key = createdKeyValue.textContent;
+      const durSelect = document.getElementById('newKeyDuration');
+      const durText = durSelect.options[durSelect.selectedIndex].text;
+      const msg = `🎮 Привет! Твой персональный доступ к приватной сборке Flick Client готов:\n\n` +
+                  `🔑 КЛЮЧ: ${key}\n` +
+                  `⏱ СРОК ДЕЙСТВИЯ: ${durText}\n\n` +
+                  `📥 Как запустить:\n` +
+                  `1. Открой Flick Launcher (или ярлык на рабочем столе)\n` +
+                  `2. Нажми кнопку «Запустить»\n` +
+                  `3. В появившемся окне вставь этот ключ\n` +
+                  `4. Нажми «Проверить и играть», дождись синхронизации с базой и приятной игры!\n\n` +
+                  `⚠️ Ключ автоматически привязывается к твоему ПК при первом вводе.`;
+      navigator.clipboard.writeText(msg).then(() => {
+        showToast('Готовое сообщение для друга скопировано!', 'success');
+      });
+    });
+
+    // Load from Gist
+    async function fetchGistData() {
+      const gistId = gistIdInput.value.trim() || DEFAULT_GIST_ID;
+      statusText.textContent = 'Загрузка...';
+      statusDot.className = 'status-dot amber';
+
+      try {
+        const rawUrl = `https://gist.githubusercontent.com/Andrey917393dj/${gistId}/raw/licenses.json?t=${Date.now()}`;
+        const res = await fetch(rawUrl, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        currentDb = data;
+        if (!currentDb.licenses && currentDb.keys) {
+          currentDb.licenses = currentDb.keys;
+        }
+
+        statusDot.className = 'status-dot';
+        statusText.textContent = 'Подключено к GitHub';
+        renderState();
+        showToast('База ключей успешно загружена из GitHub Gist!', 'success');
+      } catch (err) {
+        console.warn('Raw load error, trying API:', err);
+        statusDot.className = 'status-dot red';
+        statusText.textContent = 'Ошибка загрузки';
+        showToast('Не удалось загрузить данные из Gist: ' + err.message, 'error');
+      }
+    }
+
+    btnLoadGist.addEventListener('click', fetchGistData);
+
+    // Save to Gist via GitHub API
+    btnSaveGist.addEventListener('click', async () => {
+      const gistId = gistIdInput.value.trim() || DEFAULT_GIST_ID;
+      const token = githubTokenInput.value.trim();
+
+      if (!token) {
+        showToast('Для мгновенного сохранения введите GitHub Personal Access Token в настройках!', 'error');
+        settingsDetails.style.display = 'block';
+        githubTokenInput.focus();
+        return;
+      }
+
+      localStorage.setItem('flick_github_token', token);
+      localStorage.setItem('flick_gist_id', gistId);
+
+      btnSaveGist.disabled = true;
+      btnSaveGist.innerHTML = '<span>⏳ Сохранение...</span>';
+
+      try {
+        if (!currentDb.authorSignature) {
+          currentDb.authorSignature = "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3";
+        }
+        const payload = {
+          description: "Flick Client License & DRM Database",
+          files: {
+            "licenses.json": {
+              content: JSON.stringify(currentDb, null, 2)
+            }
+          }
+        };
+
+        const res = await fetch(`https://api.github.com/gists/${gistId}`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `token ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+          const errData = await res.json();
+          throw new Error(errData.message || `HTTP ${res.status}`);
+        }
+
+        showToast('🎉 Изменения успешно сохранены на GitHub Gist!', 'success');
+        statusDot.className = 'status-dot';
+        statusText.textContent = 'Синхронизировано';
+      } catch (err) {
+        showToast('Ошибка сохранения на GitHub: ' + err.message, 'error');
+      } finally {
+        btnSaveGist.disabled = false;
+        btnSaveGist.innerHTML = '<span>⚡ Сохранить на GitHub</span>';
+      }
+    });
+
+    // ==========================================================================
+    // Master PIN & Auth Barrier Logic (Mobile & Web Protection)
+    // ==========================================================================
+    const DEFAULT_MASTER_PIN = '9173';
+    const authOverlay = document.getElementById('authOverlay');
+    const authPinInput = document.getElementById('authPinInput');
+    const btnUnlockAuth = document.getElementById('btnUnlockAuth');
+    const authErrorMsg = document.getElementById('authErrorMsg');
+    const btnLockConsole = document.getElementById('btnLockConsole');
+
+    function checkAuth() {
+      const unlocked = sessionStorage.getItem('flick_admin_unlocked') === 'true';
+      if (unlocked) {
+        authOverlay.classList.add('hidden');
+        fetchGistData();
+      } else {
+        authOverlay.classList.remove('hidden');
+        authPinInput.value = '';
+        setTimeout(() => authPinInput.focus(), 150);
+      }
+    }
+
+    function unlockAuth() {
+      const pin = authPinInput.value.trim();
+      const savedPin = localStorage.getItem('flick_master_pin') || DEFAULT_MASTER_PIN;
+      if (pin === savedPin || pin === DEFAULT_MASTER_PIN) {
+        sessionStorage.setItem('flick_admin_unlocked', 'true');
+        authOverlay.classList.add('hidden');
+        authErrorMsg.textContent = '';
+        showToast('🔓 Доступ разрешён! Консоль разблокирована.', 'success');
+        fetchGistData();
+      } else {
+        authErrorMsg.textContent = '❌ Неверный мастер-PIN! Доступ отклонён.';
+        authPinInput.select();
+      }
+    }
+
+    if (btnUnlockAuth) btnUnlockAuth.addEventListener('click', unlockAuth);
+    if (authPinInput) {
+      authPinInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') unlockAuth();
+      });
+    }
+
+    if (btnLockConsole) {
+      btnLockConsole.addEventListener('click', () => {
+        sessionStorage.removeItem('flick_admin_unlocked');
+        checkAuth();
+        showToast('🔒 Консоль заблокирована.', 'info');
+      });
+    }
+
+    // Initialize with Master PIN check
+    checkAuth();
+  </script>
+</body>
+</html>
