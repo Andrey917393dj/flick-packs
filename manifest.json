@@ -4,19 +4,7 @@
     "guard_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/legacy_extracted/guard/guard.jar",
     "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
     "network": "Flick Official Protected Network 2026",
-    "modpacks": [
-        {
-            "id": "tehnomagicheskij_perekrytie",
-            "name": "⚙️ Техномагический Предел",
-            "version": "1.12.2",
-            "forgeVersion": "14.23.5.2864",
-            "description": "Погрузитесь в мир, где небеса полны парящих островов, а под ногами — бесконечные шахты, наполненные загадочными энергиями. Исследуйте тайные механизмы, создавайте могущественные артефакты и сражайтесь с древними существами, используя как технологию, так и магию.",
-            "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/tehnomagicheskij_perekrytie.pak",
-            "sha256": "fcca7406feecc8c5e808f1383a0582636d9d5ad0ea8d16e7ecf08a74a62d861b",
-            "sizeMb": "277.5",
-            "password": "ENC(0000026e7c080f786900170705720d676309)"
-        }
-    ],
+    "modpacks": [],
     "killswitch": false,
     "killswitchReason": ""
 }
