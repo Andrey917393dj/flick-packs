@@ -4,7 +4,19 @@
     "guard_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/legacy_extracted/guard/guard.jar",
     "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
     "network": "Flick Official Protected Network 2026",
-    "modpacks": [],
+    "modpacks": [
+        {
+            "id": "tekhomagicheskij_perek",
+            "name": "⚙️ Техномагический Предел",
+            "version": "1.12.2",
+            "forgeVersion": "14.23.5.2864",
+            "description": "Погрузитесь в мир, где небесные архипелаги скрывают древние тайны, а паровые механизмы оживают под вашими руками. Сочетание магии и технологии открывает бесконечные возможности для строительства, исследования и сражений.",
+            "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/tekhomagicheskij_perek.pak",
+            "sha256": "431c25763297f098eed36a02abc4d17019918e9ecccfc3b2d1b11dc98279c4d3",
+            "sizeMb": "277.5",
+            "password": "ENC(0000026e050605036903070611721603020e)"
+        }
+    ],
     "killswitch": false,
     "killswitchReason": ""
 }
