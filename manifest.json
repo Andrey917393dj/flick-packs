@@ -1,8 +1,19 @@
 {
     "launcher_version": "1.0.0",
     "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
-    "network": "Protected Cloud Network",
-    "modpacks": [],
+    "network": "Flick Official Protected Network 2026",
+    "modpacks": [
+        {
+            "id": "iron_horizon_industrial_survival",
+            "name": "⚙️ Iron Horizon: Industrial Survival",
+            "version": "1.12.2",
+            "forgeVersion": "14.23.5.2864",
+            "description": "Погрузитесь в мир, где суровые климатические условия и реалистичная физика тела ставят перед вами испытание на прочность, а глубокое погружение в промышленную автоматизацию превращает шахты в сложные энергетические хабы. Исследуйте парящие небесные острова и уникальные биомы, создавая продвинутые механизмы, цифровые логистические сети и мощное техническое оружие, чтобы выжить в мире, где магия и наука переплетаются в единой индустриальной реальности.",
+            "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/iron_horizon_industrial_survival.pak",
+            "sha256": "5cfd6eef6204beb5ae8387197d841a55bd5eb3ae251d19b3964a98596b8f06e7",
+            "sizeMb": "280.5"
+        }
+    ],
     "killswitch": false,
     "killswitchReason": ""
 }
