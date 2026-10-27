@@ -1,35 +1,10 @@
 {
-  "launcher_version": "1.0.1",
-  "launcher_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/LegacyLauncherExtended/FlickLauncher.exe",
-  "guard_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/legacy_extracted/guard/guard.jar",
-  "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
-  "network": "Flick Official Protected Network 2026",
-  "modpacks": [
-    {
-      "id": "tekhomagicheskij_perekrytie",
-      "name": "⚙️ Техномагический Предел",
-      "version": "1.12.2",
-      "forgeVersion": "14.23.5.2864",
-      "description": "Погрузитесь в мир, где древняя магия переплетается с передовыми технологиями, а каждый шаг открывает новые тайны подземных глубин и небесных высот. Исследуйте живописные биомы, создавайте мощные механизмы и сражайтесь с уникальными существами, используя как заклинания, так и инженерные изобретения.",
-      "pakFile": "packs/tekhomagicheskij_perekrytie.pak",
-      "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/tekhomagicheskij_perekrytie.pak",
-      "sha256": "216916ab5637006b4e7be561475648666e0376bcb14c852ad5831cd2442ac133",
-      "sizeMb": "280.8",
-      "password": "ENC(0000026e7c17790b6916160b137217106706)"
-    },
-    {
-      "id": "astraalny_inzhener",
-      "name": "⚙️ Астральный Инженер: Пределы Реальности",
-      "version": "1.12.2",
-      "forgeVersion": "14.23.5.2864",
-      "description": "Погрузитесь в мир, где небесные острова парят над бесконечными шахтами, а древняя магия переплетается с передовыми технологиями. Исследуйте скрытые биомы, стройте механизмы, способные управлять энергией стихий, и сразитесь с могущественными существами, охраняющими тайны прошлого.",
-      "pakFile": "packs/astraalny_inzhener.pak",
-      "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/astraalny_inzhener.pak",
-      "sha256": "232c07707eb016f2af6692a50fcfd87209e6ca68f18fd40f16acecf5090b70fd",
-      "sizeMb": "280.5",
-      "password": "ENC(0000026e1e051e01690816120e72160c040d)"
-    }
-  ],
-  "killswitch": false,
-  "killswitchReason": ""
+    "launcher_version": "1.0.1",
+    "launcher_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/LegacyLauncherExtended/FlickLauncher.exe",
+    "guard_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/legacy_extracted/guard/guard.jar",
+    "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
+    "network": "Flick Official Protected Network 2026",
+    "modpacks": [],
+    "killswitch": false,
+    "killswitchReason": ""
 }
