@@ -1,19 +1,19 @@
 {
-    "launcher_version": "1.0.0",
-    "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
-    "network": "Flick Official Protected Network 2026",
-    "modpacks": [
-        {
-            "id": "iron_horizon_survival",
-            "name": "⚙️ Iron Horizon: Суровая Индустрия",
-            "version": "1.12.2",
-            "forgeVersion": "14.23.5.2864",
-            "description": "Погрузитесь в мир, где холодные ветры и суровые климатические условия требуют безупречной подготовки, а каждый шаг по опасным землям может стать последним. Постройте империю из ржавого железа и дымящих труб, автоматизируя цепочки переработки и создавая сложные энергосети, чтобы покорить не только поверхность, но и парящие небесные острова за горизонтом. Здесь вы станете архитектором собственной судьбы, балансируя между хрупкостью человеческой жизни и мощью промышленной цивилизации.",
-            "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/iron_horizon_survival.pak",
-            "sha256": "b23c53992207cc783908cc7ffefdbd9a1ce74641d6ca84cac875239314a195b6",
-            "sizeMb": "280.5"
-        }
-    ],
-    "killswitch": false,
-    "killswitchReason": ""
+  "launcher_version": "1.0.0",
+  "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
+  "network": "Protected Cloud Network",
+  "modpacks": [
+    {
+      "id": "iron_horizon_survival",
+      "name": "Iron Horizon: Суровая Индустрия",
+      "version": "1.12.2",
+      "forgeVersion": "14.23.5.2864",
+      "description": "Погрузитесь в мир, где холодные ветры и суровые климатические условия требуют безупречной подготовки, а каждый шаг по опасным землям может стать последним. Постройте империю из ржавого железа и дымящих труб, автоматизируя цепочки переработки и создавая сложные энергосети, чтобы покорить не только поверхность, но и парящие небесные острова за горизонтом. Здесь вы станете архитектором собственной судьбы, балансируя между хрупкостью человеческой жизни и мощью промышленной цивилизации.",
+      "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/iron_horizon_survival.pak",
+      "sha256": "b23c53992207cc783908cc7ffefdbd9a1ce74641d6ca84cac875239314a195b6",
+      "sizeMb": "280.5"
+    }
+  ],
+  "killswitch": false,
+  "killswitchReason": ""
 }
