@@ -1,0 +1,19 @@
+{
+    "launcher_version": "1.0.0",
+    "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
+    "network": "Flick Official Protected Network 2026",
+    "modpacks": [
+        {
+            "id": "industrial_odyssey_tech_survival",
+            "name": "⚙️ Industrial Odyssey: Tech & Survival",
+            "version": "1.12.2",
+            "forgeVersion": "14.23.5.2859",
+            "description": "Погрузитесь в мир, где передовые промышленные фабрики и энергосети переплетаются с суровым реалистичным выживанием, термодинамикой и жаждой. Стройте гигантские автоматизированные заводы, исследуйте парящие небесные острова и познакомьтесь с богатой дикой природой.",
+            "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/industrial_odyssey_tech_survival.pak",
+            "sha256": "6649a7bdc773ef622ba16d4b5969c8eb572d54d0bdf11da0c8ae04c50aa251ab",
+            "sizeMb": "280.6"
+        }
+    ],
+    "killswitch": false,
+    "killswitchReason": ""
+}
