@@ -4,19 +4,7 @@
     "guard_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/legacy_extracted/guard/guard.jar",
     "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
     "network": "Flick Official Protected Network 2026",
-    "modpacks": [
-        {
-            "id": "techno_epocha_podelnoe",
-            "name": "⚙️ Техно-Эпоха: Пределы Возможного",
-            "version": "1.12.2",
-            "forgeVersion": "14.23.5.2864",
-            "description": "Погрузитесь в мир, где небеса полны парящих островов, а под ногами — бесконечные шахты и механизмы, оживляющие каждый шаг. Исследуйте тайные биомы, стройте сложные фабрики и сражайтесь с новыми угрозами, используя продвинутую физику предметов и динамичную световую атмосферу.",
-            "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/techno_epocha_podelnoe.pak",
-            "sha256": "3722bc6af5bb0515c83b3bb73ac20c1d928bd8baac2f27500782018315024549",
-            "sizeMb": "277.5",
-            "password": "ENC(0000026e186d031d6962750503721461631c)"
-        }
-    ],
+    "modpacks": [],
     "killswitch": false,
     "killswitchReason": ""
 }
