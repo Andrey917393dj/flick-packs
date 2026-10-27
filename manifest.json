@@ -2,7 +2,19 @@
     "launcher_version": "1.0.0",
     "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
     "network": "Flick Official Protected Network 2026",
-    "modpacks": [],
+    "modpacks": [
+        {
+            "id": "astraalny_inzhener",
+            "name": "⚙️ Астральный Инженер: Пределы Реальности",
+            "version": "1.12.2",
+            "forgeVersion": "14.23.5.2864",
+            "description": "Погрузитесь в мир, где небесные острова парят над бесконечными шахтами, а древняя магия переплетается с передовыми технологиями. Исследуйте скрытые биомы, стройте механизмы, способные управлять энергией стихий, и сразитесь с могущественными существами, охраняющими тайны прошлого.",
+            "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/astraalny_inzhener.pak",
+            "sha256": "588f449a51db2cd4be102d2f4cfe81d34b19588b5f83a93db15b813f52abe0cf",
+            "sizeMb": "280.5",
+            "password": "ENC(0000026e1e051e01690816120e72160c040d)"
+        }
+    ],
     "killswitch": false,
     "killswitchReason": "",
     "launcher_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/LegacyLauncherExtended/FlickLauncher.exe",
