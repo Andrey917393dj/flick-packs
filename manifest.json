@@ -1,22 +1,5 @@
 {
-    "launcher_version": "1.0.1",
-    "launcher_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/LegacyLauncherExtended/FlickLauncher.exe",
-    "guard_download_url": "https://raw.githubusercontent.com/Andrey917393dj/flick-client-source/main/legacy_extracted/guard/guard.jar",
-    "authorSignature": "29626a19bf93a70e60b4a84f541b595616fe6f183fa82babe02a80da624211d3",
-    "network": "Flick Official Protected Network 2026",
-    "modpacks": [
-        {
-            "id": "tekhomagicheskij_perek",
-            "name": "⚙️ Техномагический Предел",
-            "version": "1.12.2",
-            "forgeVersion": "14.23.5.2864",
-            "description": "Погрузитесь в мир, где небесные архипелаги скрывают древние тайны, а паровые механизмы оживают под вашими руками. Сочетание магии и технологии открывает бесконечные возможности для строительства, исследования и сражений.",
-            "downloadUrl": "https://github.com/Andrey917393dj/flick-packs/releases/download/v1.1.0/tekhomagicheskij_perek.pak",
-            "sha256": "431c25763297f098eed36a02abc4d17019918e9ecccfc3b2d1b11dc98279c4d3",
-            "sizeMb": "277.5",
-            "password": "ENC(0000026e050605036903070611721603020e)"
-        }
-    ],
-    "killswitch": false,
-    "killswitchReason": ""
+  "schemaVersion": 1,
+  "payload": "eyJsYXVuY2hlcl92ZXJzaW9uIjoiMS4wLjEiLCJsYXVuY2hlcl9kb3dubG9hZF91cmwiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vQW5kcmV5OTE3MzkzZGovZmxpY2stY2xpZW50LXNvdXJjZS9tYWluL0xlZ2FjeUxhdW5jaGVyRXh0ZW5kZWQvRmxpY2tMYXVuY2hlci5leGUiLCJndWFyZF9kb3dubG9hZF91cmwiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vQW5kcmV5OTE3MzkzZGovZmxpY2stY2xpZW50LXNvdXJjZS9tYWluL2xlZ2FjeV9leHRyYWN0ZWQvZ3VhcmQvZ3VhcmQuamFyIiwibmV0d29yayI6IkZsaWNrIE9mZmljaWFsIFByb3RlY3RlZCBOZXR3b3JrIDIwMjYiLCJtb2RwYWNrcyI6W3siaWQiOiJ0ZWtob21hZ2ljaGVza2lqX3BlcmVrIiwibmFtZSI6IuKame+4jyDQotC10YXQvdC+0LzQsNCz0LjRh9C10YHQutC40Lkg0J/RgNC10LTQtdC7IiwidmVyc2lvbiI6IjEuMTIuMiIsImZvcmdlVmVyc2lvbiI6IjE0LjIzLjUuMjg2NCIsImRlc2NyaXB0aW9uIjoi0J/QvtCz0YDRg9C30LjRgtC10YHRjCDQsiDQvNC40YAsINCz0LTQtSDQvdC10LHQtdGB0L3Ri9C1INCw0YDRhdC40L/QtdC70LDQs9C4INGB0LrRgNGL0LLQsNGO0YIg0LTRgNC10LLQvdC40LUg0YLQsNC50L3Riywg0LAg0L/QsNGA0L7QstGL0LUg0LzQtdGF0LDQvdC40LfQvNGLINC+0LbQuNCy0LDRjtGCINC/0L7QtCDQstCw0YjQuNC80Lgg0YDRg9C60LDQvNC4LiDQodC+0YfQtdGC0LDQvdC40LUg0LzQsNCz0LjQuCDQuCDRgtC10YXQvdC+0LvQvtCz0LjQuCDQvtGC0LrRgNGL0LLQsNC10YIg0LHQtdGB0LrQvtC90LXRh9C90YvQtSDQstC+0LfQvNC+0LbQvdC+0YHRgtC4INC00LvRjyDRgdGC0YDQvtC40YLQtdC70YzRgdGC0LLQsCwg0LjRgdGB0LvQtdC00L7QstCw0L3QuNGPINC4INGB0YDQsNC20LXQvdC40LkuIiwiZG93bmxvYWRVcmwiOiJodHRwczovL2dpdGh1Yi5jb20vQW5kcmV5OTE3MzkzZGovZmxpY2stcGFja3MvcmVsZWFzZXMvZG93bmxvYWQvdjEuMi4wL3Rla2hvbWFnaWNoZXNraWpfcGVyZWsucGFrIiwic2hhMjU2IjoiOTM4YmY1ZWE3ZWMxN2IxYjliNWU3YTNkMjMxOGRjZGVlNDQ3ZGY0ZjFiYmQ2YmFkNmY1NDkxNjgxMWI2Y2ZmNCIsInNpemVNYiI6IjI2Ny43IiwicGFrRmlsZSI6InBhY2tzL3Rla2hvbWFnaWNoZXNraWpfcGVyZWsucGFrIiwicGFzc3dvcmRNb2RlIjoibGljZW5zZS13cmFwLXYxIn1dLCJraWxsc3dpdGNoIjpmYWxzZSwia2lsbHN3aXRjaFJlYXNvbiI6IiIsInJ1bnRpbWUiOnsidmVyc2lvbiI6IjIuNS4wIiwiaW5zdGFsbGVyVXJsIjoiaHR0cHM6Ly9naXRodWIuY29tL0FuZHJleTkxNzM5M2RqL2ZsaWNrLWNsaWVudC1ydW50aW1lL3JlbGVhc2VzL2Rvd25sb2FkL3YyLjUuMC9GbGlja0xhdW5jaGVyU2V0dXAuZXhlIiwiaW5zdGFsbGVyU2hhMjU2IjoiNzA4ZTQ0MDYyYzA2NDRmMTI3YjNmYjNkODIxM2JmMDJmOWU4NGI0MDBlYTg5N2MyMDBkOWI5MWZlY2I4YTMzMiIsImluc3RhbGxlclNpZ25hdHVyZVVybCI6Imh0dHBzOi8vZ2l0aHViLmNvbS9BbmRyZXk5MTczOTNkai9mbGljay1jbGllbnQtcnVudGltZS9yZWxlYXNlcy9kb3dubG9hZC92Mi41LjAvRmxpY2tMYXVuY2hlclNldHVwLmV4ZS5zaWciLCJkb3dubG9hZFVybCI6Imh0dHBzOi8vZ2l0aHViLmNvbS9BbmRyZXk5MTczOTNkai9mbGljay1jbGllbnQtcnVudGltZS9yZWxlYXNlcy9kb3dubG9hZC92Mi41LjAvY2xpZW50X3J1bnRpbWUucGFrIiwic2hhMjU2IjoiODRkODNiNjRlZGM4OWU5MDJlNWVhNTU5MmY0MjU2NWNkZTU4ODE0MWI4NmU1NjI2MWYwNDUwNmUzYTAzOWIzOCIsInNpZ25hdHVyZVVybCI6Imh0dHBzOi8vZ2l0aHViLmNvbS9BbmRyZXk5MTczOTNkai9mbGljay1jbGllbnQtcnVudGltZS9yZWxlYXNlcy9kb3dubG9hZC92Mi41LjAvY2xpZW50X3J1bnRpbWUucGFrLnNpZyJ9LCJ1cGRhdGVkQXQiOiIyMDI2LTEwLTMwVDIxOjI1OjUzLjA4N1oifQ==",
+  "signature": "RwoK51O6Cipo0LWC8njFiwqLKfT5cyu/unPHi9oG7Vfk8JHxFSs0lOV4y6j+GIr+/dDxkbnn6h6CT1vlG6tFSMKEPbrMSvXqm1HvxENPT2BFJFQF9Gr6CfdXitmwWwj3vOcCT4kn+n86PyARaIi1/UXM1mNnLsQz+rGDfmoafRYHXbpjKz34NTfjYu8TWi8plXagdz99DhBVcLyP8bjFZl6k5W2ko3em8lIOPUp6k2LMlnVJZ5EyhUpsLgnqh+hVdkmmINi/awj3ZGjECnpd728DojW7twWEPBz6XaKGGGyNta0+tfM8NxI7d9Rot75KpvX9qdu5dtYGjudmYhFZkQ=="
 }
